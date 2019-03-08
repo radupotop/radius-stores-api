@@ -1,0 +1,9 @@
+Click==7.0
+Flask==1.0.2
+itsdangerous==1.1.0
+Jinja2==2.10
+MarkupSafe==1.1.1
+marshmallow==2.19.0
+peewee==3.9.2
+webargs==5.1.2
+Werkzeug==0.14.1
