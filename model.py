@@ -9,7 +9,7 @@ class BaseModel(pw.Model):
 
 
 class Postcodes(BaseModel):
-    name = pw.CharField()
+    name = pw.CharField(unique=True)
     postcode = pw.CharField()
     latitude = pw.FloatField(null=True)
     longitude = pw.FloatField(null=True)

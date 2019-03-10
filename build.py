@@ -7,6 +7,10 @@ from model import db, Postcodes
 
 
 def build():
+    """
+    Read stores and postcodes from json file and
+    push the data into db.
+    """
     db.connect()
     db.create_tables((Postcodes,))
 
@@ -47,4 +51,5 @@ def fetch_postcodes():
     Path('./postcodes.json').write_bytes(resp.content)
 
 
-build()
+if __name__ == '__main__':
+    build()
