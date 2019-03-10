@@ -22,7 +22,7 @@ def index(args):
             Postcodes.postcode.contains(args['postcode'])
         )
     else:
-        query_result = Postcodes.select()
+        query_result = Postcodes.select().order_by(Postcodes.name)
 
     postcode_schema = PostcodeSchema(many=True)
     result = postcode_schema.dump(query_result).data
