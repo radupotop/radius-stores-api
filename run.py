@@ -17,7 +17,13 @@ index_args = {'postcode': fields.Str(), 'radius': fields.Str()}
 @app.route('/')
 @use_args(index_args)
 def index(args):
-    query_result = Postcodes.select()
+    if args.get('postcode'):
+        query_result = Postcodes.select().where(
+            Postcodes.postcode.contains(args['postcode'])
+        )
+    else:
+        query_result = Postcodes.select()
+
     postcode_schema = PostcodeSchema(many=True)
     result = postcode_schema.dump(query_result).data
     return jsonify(result)
