@@ -11,5 +11,7 @@ class BaseModel(pw.Model):
 class Postcodes(BaseModel):
     name = pw.CharField(unique=True)
     postcode = pw.CharField()
-    latitude = pw.FloatField(null=True)
     longitude = pw.FloatField(null=True)
+    latitude = pw.FloatField(null=True)
+    eastings = pw.IntegerField(null=True)
+    northings = pw.IntegerField(null=True)

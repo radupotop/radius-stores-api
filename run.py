@@ -21,6 +21,11 @@ def index(args):
         query_result = Postcodes.select().where(
             Postcodes.postcode.contains(args['postcode'])
         )
+    elif args.get('nearby'):
+        result = Postcodes.select().where(Postcodes.postcode == args['nearby'])
+        lat = round(result[0].latitude, 2)
+        lng = round(result[0].longitude, 2)
+        print(lat, lng)
     else:
         query_result = Postcodes.select().order_by(Postcodes.name)
 
