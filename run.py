@@ -11,7 +11,7 @@ from schema import PostcodeSchema
 
 app = Flask(__name__)
 
-index_args = {'postcode': fields.Str(), 'radius': fields.Str()}
+index_args = {'postcode': fields.Str(), 'nearby': fields.Str()}
 
 
 @app.route('/')
