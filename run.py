@@ -1,12 +1,12 @@
 import json
-from pathlib import Path
 from operator import attrgetter, itemgetter
+from pathlib import Path
 
 from flask import Flask, abort, jsonify
 from webargs import fields
 from webargs.flaskparser import use_args
 
-from model import db, Postcodes
+from model import Postcodes, db
 from schema import PostcodeSchema
 
 app = Flask(__name__)
