@@ -18,13 +18,14 @@ def build():
     with db.atomic():
         for idx, store in enumerate(stores_file):
             print('Store:', store['name'], store['postcode'])
+            postcode_data = postcodes_file[idx].get('result')
 
-            if postcodes_file[idx].get('result'):
+            if postcode_data:
                 Postcodes.create(
                     name=store['name'],
                     postcode=store['postcode'],
-                    latitude=postcodes_file[idx]['result']['latitude'],
-                    longitude=postcodes_file[idx]['result']['longitude'],
+                    latitude=postcode_data['latitude'],
+                    longitude=postcode_data['longitude'],
                 )
             else:
                 Postcodes.create(name=store['name'], postcode=store['postcode'])
