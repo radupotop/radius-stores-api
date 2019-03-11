@@ -30,7 +30,11 @@ def index(args):
         all_coordinates = Postcodes.select().where(
             Postcodes.longitude, Postcodes.latitude
         )
-        target = Postcodes.select().where(Postcodes.postcode == args['nearby'])[0]
+        _result = Postcodes.select().where(Postcodes.postcode == args['nearby'])
+        if _result:
+            target = _result[0]
+        else:
+            abort(400)
 
         coordinates_idx = tuple((c.longitude, c.latitude) for c in all_coordinates)
         tree = spatial.KDTree(coordinates_idx)
@@ -50,10 +54,7 @@ def index(args):
     if args.get('radius') == 0.25:
         del args['radius']
 
-    result = {
-        'query': args,
-        'results': postcode_schema.dump(query_result).data,
-    }
+    result = {'query': args, 'results': postcode_schema.dump(query_result).data}
 
     return jsonify(result)
 
