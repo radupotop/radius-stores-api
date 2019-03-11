@@ -15,7 +15,7 @@ app = Flask(__name__)
 index_args = {
     'postcode': fields.Str(),
     'nearby': fields.Str(),
-    'radius': fields.Float(missing=0.5),
+    'radius': fields.Float(missing=0.25),
 }
 
 
