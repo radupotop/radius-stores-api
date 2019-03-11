@@ -2,11 +2,6 @@ import unittest
 from run import app
 
 
-def hasindex(lst, idx):
-    ln = len(lst)
-    return (abs(idx) < ln) or (idx == -ln)
-
-
 class TailsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
