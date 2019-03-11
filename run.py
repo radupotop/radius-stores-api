@@ -46,7 +46,15 @@ def index(args):
         query_result = Postcodes.select().order_by(Postcodes.name)
 
     postcode_schema = PostcodeSchema(many=True)
-    result = postcode_schema.dump(query_result).data
+
+    if args.get('radius') == 0.25:
+        del args['radius']
+
+    result = {
+        'query': args,
+        'results': postcode_schema.dump(query_result).data,
+    }
+
     return jsonify(result)
 
 
