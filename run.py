@@ -56,7 +56,7 @@ def index(args):
         query_result = []
         for idx in nearby_idx:
             query_result.append(all_coordinates[idx])
-        query_result.sort(key=attrgetter('latitude'))
+        query_result.sort(key=attrgetter('latitude'), reverse=True)
 
     else:
         query_result = Postcodes.select().order_by(Postcodes.name)

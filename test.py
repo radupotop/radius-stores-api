@@ -67,7 +67,7 @@ class TailsTest(unittest.TestCase):
         next(idx_latitudes)
 
         for idx, lat in idx_latitudes:
-            self.assertTrue(lat > latitudes[idx - 1])
+            self.assertTrue(lat < latitudes[idx - 1])
 
     def test_nearby_bogus_postcode(self):
         response = self.test_client.get('/?nearby=NW3+XYZ')
