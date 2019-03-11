@@ -22,6 +22,14 @@ index_args = {
 @app.route('/')
 @use_args(index_args)
 def index(args):
+    """
+    The main route of the app.
+    Supports:
+
+    - partial postcode lookup using the postcode query parameter: ?postcode=SW11
+    - exact postcode matching and neighbour lookup using the combined
+      nearby and radius query parameters: ?nearby=NW1+9EX&radius=0.1
+    """
     if args.get('postcode'):
         query_result = Postcodes.select().where(
             Postcodes.postcode.contains(args['postcode'])
@@ -34,6 +42,7 @@ def index(args):
         if _result:
             target = _result[0]
         else:
+            # Can be 400 or 404, this is up for debate.
             abort(400)
 
         coordinates_idx = tuple((c.longitude, c.latitude) for c in all_coordinates)
