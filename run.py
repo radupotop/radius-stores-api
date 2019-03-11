@@ -3,9 +3,9 @@ from operator import attrgetter, itemgetter
 from pathlib import Path
 
 from flask import Flask, abort, jsonify
+from scipy import spatial
 from webargs import fields
 from webargs.flaskparser import use_args
-from scipy import spatial
 
 from model import Postcodes, db
 from schema import PostcodeSchema
@@ -29,6 +29,8 @@ def index(args):
     - partial postcode lookup using the postcode query parameter: ?postcode=SW11
     - exact postcode matching and neighbour lookup using the combined
       nearby and radius query parameters: ?nearby=NW1+9EX&radius=0.1
+
+    Uses KDTree from scipy to lookup neighbouring coordinates.
     """
     if args.get('postcode'):
         query_result = Postcodes.select().where(
