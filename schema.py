@@ -6,5 +6,3 @@ class PostcodeSchema(Schema):
     postcode = fields.Str()
     longitude = fields.Float()
     latitude = fields.Float()
-    eastings = fields.Int()
-    northings = fields.Int()

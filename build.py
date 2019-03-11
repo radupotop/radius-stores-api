@@ -30,8 +30,6 @@ def build():
                     postcode=store['postcode'],
                     longitude=postcode_data['longitude'],
                     latitude=postcode_data['latitude'],
-                    eastings=postcode_data['eastings'],
-                    northings=postcode_data['northings'],
                 )
             else:
                 Postcodes.create(name=store['name'], postcode=store['postcode'])
