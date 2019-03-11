@@ -2,6 +2,11 @@ import unittest
 from run import app
 
 
+def hasindex(lst, idx):
+    ln = len(lst)
+    return (abs(idx) < ln) or (idx == -ln)
+
+
 class TailsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -55,6 +60,19 @@ class TailsTest(unittest.TestCase):
         response = self.test_client.get('/?nearby=SG13+7RQ')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json['results']), 7)
+
+    def test_lookup_postcode_radius_north_to_south(self):
+        """
+        Check if postcodes are ordered north to south.
+        """
+        response = self.test_client.get('/?nearby=NW1+9EX')
+        latitudes = [e['latitude'] for e in response.json['results']]
+
+        idx_latitudes = enumerate(latitudes)
+        next(idx_latitudes)
+
+        for idx, lat in idx_latitudes:
+            self.assertTrue(lat > latitudes[idx - 1])
 
     def test_nearby_bogus_postcode(self):
         response = self.test_client.get('/?nearby=NW3+XYZ')
